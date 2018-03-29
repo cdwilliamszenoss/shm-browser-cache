@@ -1,0 +1,35 @@
+#!/bin/sh
+
+# $1 is the profile directory name
+
+name="google-chrome-beta"
+
+static=static-$name
+link=$name
+volatile=/dev/shm/cache-$name-$USER
+
+IFS=
+set -efu
+
+cd /home/admin/.cache
+
+echo $static
+echo $link
+echo $volatile
+
+
+if [ ! -r $volatile ]; then
+	mkdir -m0700 $volatile
+fi
+
+if [ "$(readlink $link)" != "$volatile" ]; then
+	mv $link $static
+	ln -s $volatile $link
+fi
+
+if [ -e $link/.unpacked ]; then
+	rsync -av --delete --exclude .unpacked ./$link/ ./$static/
+else
+	rsync -av ./$static/ ./$link/
+	touch $link/.unpacked
+fi
