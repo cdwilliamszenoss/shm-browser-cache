@@ -1,7 +1,7 @@
 #!/bin/sh
 
 # $1 is the profile directory name
-name="google-chrome-beta"
+name="google-chrome"
 
 static=static-$name
 link=$name
@@ -10,7 +10,7 @@ volatile=/dev/shm/profile-$name-$USER
 IFS=
 set -efu
 
-cd /home/admin/.config
+cd $(echo $HOME)/.config
 
 echo $static
 echo $link
