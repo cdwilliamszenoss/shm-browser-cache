@@ -2,7 +2,7 @@
 
 # $1 is the profile directory name
 
-name="google-chrome-beta"
+name="google-chrome"
 
 static=static-$name
 link=$name
@@ -11,7 +11,7 @@ volatile=/dev/shm/cache-$name-$USER
 IFS=
 set -efu
 
-cd /home/admin/.cache
+cd $(echo $HOME)/.cache
 
 echo $static
 echo $link
